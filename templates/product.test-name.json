@@ -6,7 +6,7 @@
         "vendor": {
           "type": "text",
           "settings": {
-            "text": "{{ product.vendor }}",
+            "text": "{{ product.vendor }} - {{ product.metafields.my_fields.test_1.value }}",
             "text_style": "uppercase"
           }
         },
@@ -53,6 +53,20 @@
           "type": "share",
           "settings": {
           }
+        },
+        "cf047097-1099-4504-b69f-8a10b0d7bd1e": {
+          "type": "text",
+          "settings": {
+            "text": "Text block",
+            "text_style": "body"
+          }
+        },
+        "bc482fc7-2d16-44ae-8867-dae5b6bccfcb": {
+          "type": "popup",
+          "settings": {
+            "link_label": "Pop-up link text",
+            "page": ""
+          }
         }
       },
       "block_order": [
@@ -64,7 +78,9 @@
         "description",
         "quantity_selector",
         "buy_buttons",
-        "share"
+        "share",
+        "cf047097-1099-4504-b69f-8a10b0d7bd1e",
+        "bc482fc7-2d16-44ae-8867-dae5b6bccfcb"
       ],
       "settings": {
         "enable_sticky_info": true,
