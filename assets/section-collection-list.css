@@ -119,3 +119,8 @@
 .collection-list__item .card-colored {
   position: relative;
 }
+
+
+.Block--collection-list-image img {
+  max-width: 100%;
+}

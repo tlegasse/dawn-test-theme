@@ -32,14 +32,11 @@
           "settings": {
             "picker_type": "button"
           }
-<<<<<<< Updated upstream
         },
         "description": {
           "type": "description",
           "settings": {
           }
-=======
->>>>>>> Stashed changes
         },
         "quantity_selector": {
           "type": "quantity_selector",
