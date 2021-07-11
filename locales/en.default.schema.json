@@ -609,9 +609,12 @@
             "label": "Middle left"
           },
           "options__2": {
-            "label": "Top left"
+            "label": "Middle Center"
           },
           "options__3": {
+            "label": "Top left"
+          },
+          "options__4": {
             "label": "Top center"
           }
         },

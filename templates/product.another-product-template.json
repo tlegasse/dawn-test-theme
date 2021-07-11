@@ -3,16 +3,21 @@
     "main": {
       "type": "main-product",
       "blocks": {
-        "vendor": {
-          "type": "text",
+        "price": {
+          "type": "price",
           "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
           }
         },
         "title": {
           "type": "title",
           "settings": {
+          }
+        },
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
           }
         },
         "subtitle": {
@@ -22,24 +27,11 @@
             "text_style": "subtitle"
           }
         },
-        "price": {
-          "type": "price",
-          "settings": {
-          }
-        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
             "picker_type": "button"
           }
-<<<<<<< Updated upstream
-        },
-        "description": {
-          "type": "description",
-          "settings": {
-          }
-=======
->>>>>>> Stashed changes
         },
         "quantity_selector": {
           "type": "quantity_selector",
@@ -64,14 +56,14 @@
         }
       },
       "block_order": [
-        "vendor",
-        "title",
-        "subtitle",
         "price",
+        "title",
+        "vendor",
+        "subtitle",
         "variant_picker",
-        "description",
         "quantity_selector",
         "buy_buttons",
+        "description",
         "share"
       ],
       "settings": {
@@ -91,38 +83,7 @@
     },
     "collection-list": {
       "type": "collection-list",
-      "blocks": {
-        "278ea794-a8fc-427b-8354-45cb8fd03cba": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "frontpage"
-          }
-        },
-        "e7c0acbb-849b-464f-8ef4-e1c03b05638e": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "home-auto"
-          }
-        },
-        "98ec8fdc-c93f-4000-b80f-cf872300f306": {
-          "type": "collection_list_image",
-          "settings": {
-            "image": "shopify:\/\/shop_images\/500x.png"
-          }
-        }
-      },
-      "block_order": [
-        "278ea794-a8fc-427b-8354-45cb8fd03cba",
-        "e7c0acbb-849b-464f-8ef4-e1c03b05638e",
-        "98ec8fdc-c93f-4000-b80f-cf872300f306"
-      ],
       "settings": {
-        "title": "Collections",
-        "image_ratio": "square",
-        "color_scheme": "background-1",
-        "swipe_on_mobile": false,
-        "image_padding": false,
-        "show_view_all": false
       }
     }
   },
