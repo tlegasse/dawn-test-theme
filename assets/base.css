@@ -173,6 +173,10 @@
   --color-card-hover: rgba(var(--color-base-solid-button-labels-rgb), 0.06);
 }
 
+:root {
+  --tight-shadow: rgb(0 0 0 / 20%) 0px 3px 1px -2px, rgb(0 0 0 / 14%) 0px 2px 2px 0px, rgb(0 0 0 / 12%) 0px 1px 5px 0px;
+}
+
 /* base */
 
 .no-js:not(html) {
@@ -2064,9 +2068,120 @@ details[open] > .header__icon--menu .icon-hamburger {
   right: 2rem;
 }
 
-details-disclosure > details {
+header.header--mega-menu {
   position: relative;
 }
+
+header.header--mega-menu .header__submenu {
+  left: 0;
+}
+
+details-disclosure:not([data-menu-type="megamenu"]) > details {
+  position: relative;
+}
+
+details-disclosure[data-menu-type="megamenu"] .header__submenu .megamenu-container-inner {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  border-color: var(--color-foreground-8);
+  border-radius: 3px;
+}
+
+details-disclosure[data-menu-type="megamenu"] .header__submenu .list-menu__item-container {
+  max-width: 25%;
+  align-self: end;
+}
+
+.list-menu__item-container.item-container--mega-item .link {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 0 2rem;
+}
+
+.list-menu__item-container.item-container--mega-item .list-menu__item {
+  align-items: flex-start;
+}
+
+.list-menu__item-container.item-container--mega-item .link span {
+  padding-bottom: 0.95rem;
+}
+
+.list-menu__item-container.item-container--mega-item img {
+  max-width: 100%;
+}
+
+.list-menu__item-vertical-links {
+  padding: 0 2rem 0 2rem;
+}
+
+.list-menu__item-vertical-links .header__submenu {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+}
+
+.header__submenu-description {
+  margin-top: 0.95rem;
+}
+
+.mega-item__grandchildlinks {
+  list-style: none;
+  padding-left: 0;
+}
+
+.mega-item__grandchildlinks li {
+  padding-bottom: 0.95rem
+}
+
+.mega-item--has-children ul {
+  margin-top: 0.95rem;
+}
+
+.list-menu__item-vertical-links .header__submenu:hover {
+  background-color: var(--color-foreground-3);
+}
+
+.header__submenu .header__submenu > .header__menu-item {
+  padding-left: 2rem;
+}
+details .header__menu-item svg {
+  transition: 0.5s;
+}
+
+details-disclosure[data-menu-type="megamenu"] details[open] > summary svg {
+  transform: rotate(-180deg);
+}
+
+details-disclosure[data-menu-type="megamenu"] details > .header__submenu {
+  transition: 0.5s;
+  opacity: 0;
+  transform: translateY(-25%);
+}
+
+details-disclosure[data-menu-type="megamenu"] > details > .header__submenu {
+  box-shadow: var(--tight-shadow);
+  border-radius: 1.5rem;
+}
+
+.header--mega-menu.menu-full-width {
+  position: initial;
+}
+
+.header--mega-menu.menu-full-width details-disclosure[data-menu-type="megamenu"] .header__submenu {
+  width: 100%;
+}
+
+.header--mega-menu.menu-full-width details-disclosure[data-menu-type="megamenu"] .megamenu-container-inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  line-height: 1.3;
+  max-width: 120rem;
+}
+
+
 @keyframes animateMenuOpen {
   0% {
     opacity: 0;

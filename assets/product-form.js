@@ -9,6 +9,7 @@ class ProductForm extends HTMLElement {
 
   onSubmitHandler(evt) {
     evt.preventDefault();
+    console.log(this.cartNotification)
     this.cartNotification.setActiveElement(document.activeElement);
     
     const submitButton = this.querySelector('[type="submit"]');
