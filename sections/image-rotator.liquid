@@ -77,6 +77,7 @@
       contain: true,
       selectedAttraction: 0.2,
       friction: 0.8,
+      adaptiveHeight: true,
       {% unless section.settings.display_prevnext %}prevNextButtons: false,{% endunless %}
       {% if section.settings.autoplay %}autoPlay: {{ section.settings.autoplay_duration }},{% endif %}
     });
