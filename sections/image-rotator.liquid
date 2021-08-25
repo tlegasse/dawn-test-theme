@@ -45,7 +45,7 @@
           >
         </div>
       {%- endif -%}
-      <div class="rotator__content page-width" style="align-items: {{ block.settings.desktop_text_box_position }};">
+      <div class="rotator__content {% unless block.settings.slide_content_full_width %}page-width{% endunless %}" style="align-items: {{ block.settings.desktop_text_box_position }};">
         <div class="rotator__box">
           <h2 class="rotator__heading h1">
             <span>{{ block.settings.heading | escape }}</span>
@@ -78,6 +78,7 @@
       selectedAttraction: 0.2,
       friction: 0.8,
       {% unless section.settings.display_prevnext %}prevNextButtons: false,{% endunless %}
+      {% if section.settings.autoplay %}autoPlay: {{ section.settings.autoplay_duration }},{% endif %}
     });
   }
 </script>
@@ -107,16 +108,40 @@
       /* {{ block.settings.desktop_text_box_position }} */
       {%- case block.settings.desktop_text_box_position -%}
         {%- when "top" -%}
-          padding: calc({{ section.settings.slide_padding }}rem * 2) 0 0 0;
+          padding: 0 0 calc({{ section.settings.slide_padding }}rem * 2) 0;
         {%- when "middle" -%}
           padding: {{ section.settings.slide_padding }}rem 0;
         {%- when "bottom" -%}
-          padding: 0 0 calc({{ section.settings.slide_padding }}rem * 2) 0;
+          padding: calc({{ section.settings.slide_padding }}rem * 2) 0 0 0;
       {%- endcase -%}
     }
     #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__slide-background {
       opacity: {{ block.settings.text_box_opacity }}%;
     }
+
+    #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__content {
+      justify-content: {{ block.settings.desktop_horizontal_text_box_position }};
+    }
+
+    #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__box {
+      text-align: {{ block.settings.slide_text_alignment }};
+      {% if block.settings.text_box_opacity == 0 %}
+        padding: 8rem 0 0 0;
+      {% endif %}
+    }
+    #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__content .rotator__heading,
+    #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__content .rotator__text {
+      color: {{ block.settings.slide_text_color }};
+    }
+
+    {% if block.settings.slide_content_full_width %}
+      @media screen and (min-width: 750px) {
+        #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__content {
+          padding-left: 5rem;
+          padding-right: 5rem;
+        }
+      }
+    {% endif %}
   {%- endfor -%}
 </style>
 
@@ -127,42 +152,20 @@
   "class": "spaced-section spaced-section--full-width",
   "settings": [
     {
+      "type": "header",
+      "content": "Autoplay Settings"
+    },
+    {
       "type": "checkbox",
-      "id": "display_prevnext",
-      "label": "Display previous and next buttons",
+      "id": "autoplay",
+      "label": "Autoplay Rotation",
       "default": false
     },
     {
-      "type": "color",
-      "id": "dot_color_default",
-      "label": "Default Dot Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "range",
-      "id": "dot_opacity_default",
-      "label": "Inactive Dot Opacity",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 50
-    },
-    {
-      "type": "color",
-      "id": "dot_color_active",
-      "label": "Active Dot Color",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "range",
-      "id": "dot_opacity_active",
-      "label": "Active Dot Opacity",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "step": 1,
-      "default": 100
+      "type": "number",
+      "id": "autoplay_duration",
+      "label": "Autoplay Duration in Milliseconds",
+      "default": 1500
     },
     {
       "type": "header",
@@ -205,6 +208,44 @@
       "content": "Navigation settings"
     },
     {
+      "type": "checkbox",
+      "id": "display_prevnext",
+      "label": "Display previous and next buttons",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "dot_color_default",
+      "label": "Default Dot Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "dot_opacity_default",
+      "label": "Inactive Dot Opacity",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "dot_color_active",
+      "label": "Active Dot Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "dot_opacity_active",
+      "label": "Active Dot Opacity",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100
+    },
+    {
       "type": "select",
       "id": "dots_position",
       "label": "Dot Position",
@@ -238,6 +279,10 @@
       "limit": 6,
       "settings": [
         {
+          "type": "header",
+          "content": "Slide Images"
+        },
+        {
             "type": "image_picker",
             "id": "image",
             "label": "t:sections.image-rotator.settings.image.label"
@@ -246,6 +291,22 @@
             "type": "image_picker",
             "id": "image_2",
             "label": "t:sections.image-rotator.settings.image_2.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "stack_images_on_mobile",
+            "default": true,
+            "label": "t:sections.image-rotator.settings.stack_images_on_mobile.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "adapt_height_first_image",
+            "default": false,
+            "label": "t:sections.image-rotator.settings.adapt_height_first_image.label"
+        },
+        {
+          "type": "header",
+          "content": "Text Box"
         },
         {
             "type": "select",
@@ -257,7 +318,7 @@
             },
             {
                 "value": "middle",
-                "label": "t:sections.image-rotator.settings.desktop_text_box_position.options__2.label"
+                "label": "Center"
             },
             {
                 "value": "bottom",
@@ -265,7 +326,33 @@
             }
             ],
             "default": "middle",
-            "label": "t:sections.image-rotator.settings.desktop_text_box_position.label"
+            "label": "Text Box Vertical Position"
+        },
+        {
+            "type": "select",
+            "id": "desktop_horizontal_text_box_position",
+            "options": [
+            {
+                "value": "flex-start",
+                "label": "Left"
+            },
+            {
+                "value": "center",
+                "label": "Center"
+            },
+            {
+                "value": "flex-end",
+                "label": "Right"
+            }
+            ],
+            "default": "center",
+            "label": "Text Box Horizontal Position"
+        },
+        {
+          "type": "checkbox",
+          "id": "slide_content_full_width",
+          "label": "Slide Content Spans Full Width",
+          "default": false
         },
         {
             "type": "select",
@@ -306,16 +393,37 @@
           "default": 100
         },
         {
-            "type": "checkbox",
-            "id": "stack_images_on_mobile",
-            "default": true,
-            "label": "t:sections.image-rotator.settings.stack_images_on_mobile.label"
+          "type": "header",
+          "content": "Text Settings"
         },
         {
-            "type": "checkbox",
-            "id": "adapt_height_first_image",
-            "default": false,
-            "label": "t:sections.image-rotator.settings.adapt_height_first_image.label"
+          "type": "select",
+          "id": "slide_text_alignment",
+          "label": "Text Alignment",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "center",
+              "label": "Center"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "center"
+        },
+        {
+          "type": "color",
+          "id": "slide_text_color",
+          "label": "Slide Text Color"
+        },
+        {
+          "type": "header",
+          "content": "Text Content"
         },
         {
             "type": "text",

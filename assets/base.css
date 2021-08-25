@@ -2153,6 +2153,11 @@ details-disclosure[data-menu-type="megamenu"] > details > .header__submenu {
   position: initial;
 }
 
+.header--mega-menu.menu-full-width details-disclosure[data-menu-type="megamenu"] > details > .header__submenu {
+  border-radius: 0;
+  margin-top: 20px;
+}
+
 .header--mega-menu.menu-full-width details-disclosure[data-menu-type="megamenu"] .header__submenu {
   width: 100%;
 }
