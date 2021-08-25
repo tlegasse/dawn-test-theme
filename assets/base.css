@@ -723,21 +723,6 @@ summary::-webkit-details-marker {
   Focus ring - default (with offset)
 */
 
-*:focus-visible {
-  outline: 0.2rem solid var(--color-foreground-50);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem var(--color-background),
-    0 0 0.5rem 0.4rem var(--color-foreground-30);
-}
-
-/* Fallback - for browsers that don't support :focus-visible, a fallback is set for :focus */
-*:focus {
-  outline: 0.2rem solid var(--color-foreground-50);
-  outline-offset: 0.3rem;
-  box-shadow: 0 0 0 0.3rem var(--color-background),
-    0 0 0.5rem 0.4rem var(--color-foreground-30);
-}
-
 /* Negate the fallback side-effect for browsers that support :focus-visible */
 *:focus:not(:focus-visible) {
   outline: 0;
@@ -2180,6 +2165,13 @@ details-disclosure[data-menu-type="megamenu"] > details > .header__submenu {
   line-height: 1.3;
   max-width: 120rem;
 }
+
+.banner__box.color-background-2 .banner__heading span,
+.banner__box.color-background-2 .banner__buttons a,
+.banner__box.color-background-2 .banner__text span {
+  color: var(--color-base-accent-1);
+}
+
 
 
 @keyframes animateMenuOpen {

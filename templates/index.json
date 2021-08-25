@@ -1,42 +1,60 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "image_rotator": {
+      "type": "image-rotator",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "1db43053-107b-40a4-a5fd-3954cd96856e": {
+          "type": "slide",
           "settings": {
-            "heading": "Talk about your brand"
-          }
-        },
-        "button": {
-          "type": "buttons",
-          "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify:\/\/collections\/all",
+            "image": "shopify:\/\/shop_images\/bg-1-min.jpg",
+            "desktop_text_box_position": "middle",
+            "color_scheme": "background-1",
+            "text_box_opacity": 95,
+            "stack_images_on_mobile": true,
+            "adapt_height_first_image": false,
+            "heading": "Image rotator",
+            "text": "Give customers details about the rotator image(s) or content on the template.",
+            "button_label_1": "Button label",
+            "button_link_1": "#",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
           }
         },
-        "b258914e-92bd-435b-8c27-fe2fd126d3c5": {
-          "type": "text",
+        "ac36db03-cb18-4de4-80f8-b3c088994fca": {
+          "type": "slide",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template."
+            "image": "shopify:\/\/shop_images\/bg-2-min.jpg",
+            "desktop_text_box_position": "middle",
+            "color_scheme": "background-1",
+            "text_box_opacity": 95,
+            "stack_images_on_mobile": true,
+            "adapt_height_first_image": false,
+            "heading": "Image rotator",
+            "text": "Give customers details about the rotator image(s) or content on the template.",
+            "button_label_1": "Button label",
+            "button_link_1": "shopify:\/\/pages\/page-1",
+            "button_style_secondary_1": false,
+            "button_label_2": "Button label",
+            "button_link_2": "",
+            "button_style_secondary_2": false
           }
         }
       },
       "block_order": [
-        "heading",
-        "button",
-        "b258914e-92bd-435b-8c27-fe2fd126d3c5"
+        "1db43053-107b-40a4-a5fd-3954cd96856e",
+        "ac36db03-cb18-4de4-80f8-b3c088994fca"
       ],
       "settings": {
-        "desktop_text_box_position": "flex-end",
-        "color_scheme": "background-1",
-        "stack_images_on_mobile": true,
-        "adapt_height_first_image": false
+        "display_prevnext": false,
+        "dot_color_default": "#ffffff",
+        "dot_opacity_default": 50,
+        "dot_color_active": "#ffffff",
+        "dot_opacity_active": 100,
+        "slide_padding": "5",
+        "dots_position": "center",
+        "dots_full_width": false
       }
     },
     "featured_products": {
@@ -166,7 +184,7 @@
     }
   },
   "order": [
-    "image_banner",
+    "image_rotator",
     "featured_products",
     "image_text",
     "1625081803397db4e6",

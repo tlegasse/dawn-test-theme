@@ -1,0 +1,372 @@
+{{ 'section-image-rotator.css' | asset_url | stylesheet_tag }}
+
+<div id="Rotator-{{ section.id }}" class="rotator{% if block.settings.stack_images_on_mobile and block.settings.image != blank and block.settings.image_2 != blank%} rotator--stacked{% endif %}{% if block.settings.adapt_height_first_image and block.settings.image != blank %} rotator--adapt{% endif %}">
+  {%- for block in section.blocks -%}
+    <div class="rotator-slide" id="Slide-{{ block.id }}">
+      {%- if block.settings.image != blank -%}
+        <div class="rotator__media media{% if block.settings.image == blank and block.settings.image_2 == blank %} placeholder{% endif %}{% if block.settings.image_2 != blank %} rotator__media-half{% endif %}">
+          <img srcset="{%- if block.settings.image.width >= 375 -%}{{ block.settings.image | img_url: '375x' }} 375w,{%- endif -%}
+            {%- if block.settings.image.width >= 750 -%}{{ block.settings.image | img_url: '750x' }} 750w,{%- endif -%}
+            {%- if block.settings.image.width >= 1100 -%}{{ block.settings.image | img_url: '1100x' }} 1100w,{%- endif -%}
+            {%- if block.settings.image.width >= 1500 -%}{{ block.settings.image | img_url: '1500x' }} 1500w,{%- endif -%}
+            {%- if block.settings.image.width >= 1780 -%}{{ block.settings.image | img_url: '1780x' }} 1780w,{%- endif -%}
+            {%- if block.settings.image.width >= 2000 -%}{{ block.settings.image | img_url: '2000x' }} 2000w,{%- endif -%}
+            {%- if block.settings.image.width >= 2800 -%}{{ block.settings.image | img_url: '2800x' }} 2800w{%- endif -%}"
+            sizes="{% if block.settings.image_2 != blank and block.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif block.settings.image_2 != blank %}50vw{% else %}100vw{% endif %}"
+            src="{{ block.settings.image | img_url: '750x' }}"
+            loading="lazy"
+            alt="{{ block.settings.image.alt | escape }}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.width | divided_by: block.settings.image.aspect_ratio }}"
+            {% if block.settings.image_2 != blank %}class="rotator__media-image-half"{% endif %}
+          >
+        </div>
+      {%- elsif block.settings.image_2 == blank -%}
+        <div class="rotator__media media{% if block.settings.image == blank and block.settings.image_2 == blank %} placeholder{% endif %}{% if block.settings.image_2 != blank %} rotator__media-half{% endif %}">
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+      {%- if block.settings.image_2 != blank -%}
+        <div class="rotator__media media{% if block.settings.image != blank %} rotator__media-half{% endif %}">
+          <img srcset="{%- if block.settings.image_2.width >= 375 -%}{{ block.settings.image_2 | img_url: '375x' }} 375w,{%- endif -%}
+            {%- if block.settings.image_2.width >= 750 -%}{{ block.settings.image_2 | img_url: '750x' }} 750w,{%- endif -%}
+            {%- if block.settings.image_2.width >= 1100 -%}{{ block.settings.image_2 | img_url: '1100x' }} 1100w,{%- endif -%}
+            {%- if block.settings.image_2.width >= 1500 -%}{{ block.settings.image_2 | img_url: '1500x' }} 1500w,{%- endif -%}
+            {%- if block.settings.image_2.width >= 1780 -%}{{ block.settings.image_2 | img_url: '1780x' }} 1780w,{%- endif -%}
+            {%- if block.settings.image_2.width >= 2000 -%}{{ block.settings.image_2 | img_url: '2000x' }} 2000w,{%- endif -%}
+            {%- if block.settings.image_2.width >= 2800 -%}{{ block.settings.image_2 | img_url: '2800x' }} 2800w{%- endif -%}"
+            sizes="{% if block.settings.image != blank and block.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% elsif block.settings.image != blank %}50vw{% else %}100vw{% endif %}"
+            src="{{ block.settings.image_2 | img_url: '750x' }}"
+            loading="lazy"
+            alt="{{ block.settings.image_2.alt | escape }}"
+            width="{{ block.settings.image_2.width }}"
+            height="{{ block.settings.image_2.width | divided_by: block.settings.image_2.aspect_ratio }}"
+            {% if block.settings.image != blank %}class="rotator__media-image-half"{% endif %}
+          >
+        </div>
+      {%- endif -%}
+      <div class="rotator__content page-width" style="align-items: {{ block.settings.desktop_text_box_position }};">
+        <div class="rotator__box">
+          <h2 class="rotator__heading h1">
+            <span>{{ block.settings.heading | escape }}</span>
+          </h2>
+          <div class="rotator__text">
+            <span>{{ block.settings.text | escape }}</span>
+          </div>
+          <div class="rotator__buttons{% if block.settings.button_label_1 != blank and block.settings.button_link_1 != blank and block.settings.button_label_2 != blank and block.settings.button_link_2 != blank %} rotator__buttons--multiple{% endif %}">
+            {%- if block.settings.button_label_1 != blank -%}
+              <a href="{{ block.settings.button_link_1 }}" data-button-style-1="{{ block.settings.button_style_secondary_1 | json }}" data-link="{{ block.settings.button_link_1 | json }}" class="button{% if block.settings.button_style_secondary_1 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_1 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_1 | escape }}</a>
+            {%- endif -%}
+            {%- if block.settings.button_label_2 != blank -%}
+              <a href="{{ block.settings.button_link_2 }}" class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"{% if block.settings.button_link_2 == blank %} aria-disabled="true"{% endif %}>{{ block.settings.button_label_2 | escape }}</a>
+            {%- endif -%}
+          </div>
+          <div class="rotator__slide-background color-{{ block.settings.color_scheme }}"></div>
+        </div>
+      </div>
+    </div>
+  {%- endfor -%}
+</div>
+
+<script>
+  window.onload = function() {
+    var elem = document.querySelector('#Rotator-{{ section.id }}');
+    var flkty = new Flickity( elem, {
+      // options
+      cellAlign: 'left',
+      contain: true,
+      selectedAttraction: 0.2,
+      friction: 0.8,
+      {% unless section.settings.display_prevnext %}prevNextButtons: false,{% endunless %}
+    });
+  }
+</script>
+
+<style>
+  #Rotator-{{ section.id }} .dot {
+    opacity: {{ section.settings.dot_opacity_default }}%;
+    background-color: {{ section.settings.dot_color_default }};
+  }
+
+  #Rotator-{{ section.id }} .dot.is-selected {
+    opacity: {{ section.settings.dot_opacity_active }}%;
+    background-color: {{ section.settings.dot_color_active }};
+  }
+
+  #Rotator-{{ section.id }} .flickity-page-dots {
+    text-align: {{ section.settings.dots_position }};
+    {% unless section.settings.dots_full_width %}
+      max-width: 120rem;
+      left: 50%;
+      transform: translatex(-50%);
+    {% endunless %}
+  }
+  
+  {%- for block in section.blocks -%}
+    #Rotator-{{ section.id }} #Slide-{{ block.id }} {
+      /* {{ block.settings.desktop_text_box_position }} */
+      {%- case block.settings.desktop_text_box_position -%}
+        {%- when "top" -%}
+          padding: calc({{ section.settings.slide_padding }}rem * 2) 0 0 0;
+        {%- when "middle" -%}
+          padding: {{ section.settings.slide_padding }}rem 0;
+        {%- when "bottom" -%}
+          padding: 0 0 calc({{ section.settings.slide_padding }}rem * 2) 0;
+      {%- endcase -%}
+    }
+    #Rotator-{{ section.id }} #Slide-{{ block.id }} .rotator__slide-background {
+      opacity: {{ block.settings.text_box_opacity }}%;
+    }
+  {%- endfor -%}
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.image-rotator.name",
+  "tag": "section",
+  "class": "spaced-section spaced-section--full-width",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "display_prevnext",
+      "label": "Display previous and next buttons",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "dot_color_default",
+      "label": "Default Dot Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "dot_opacity_default",
+      "label": "Inactive Dot Opacity",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 50
+    },
+    {
+      "type": "color",
+      "id": "dot_color_active",
+      "label": "Active Dot Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "dot_opacity_active",
+      "label": "Active Dot Opacity",
+      "unit": "%",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Global slide settings",
+      "info": "Slide specific settings"
+    },
+    {
+      "type": "select",
+      "id": "slide_padding",
+      "label": "Slide Padding",
+      "options": [
+        {
+          "value": "5",
+          "label": "Small"
+        },
+        {
+          "value": "10",
+          "label": "Small Medium"
+        },
+        {
+          "value": "15",
+          "label": "Medium"
+        },
+        {
+          "value": "20",
+          "label": "Medium Large"
+        },
+        {
+          "value": "25",
+          "label": "Large"
+        },
+        {
+          "value": "30",
+          "label": "Extra Large"
+        }
+      ]
+    },
+    {
+      "type": "header",
+      "content": "Navigation settings"
+    },
+    {
+      "type": "select",
+      "id": "dots_position",
+      "label": "Dot Position",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "dots_full_width",
+      "label": "Dots span the full width of the page",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "t:sections.image-rotator.blocks.slide.name",
+      "limit": 6,
+      "settings": [
+        {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:sections.image-rotator.settings.image.label"
+        },
+        {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "t:sections.image-rotator.settings.image_2.label"
+        },
+        {
+            "type": "select",
+            "id": "desktop_text_box_position",
+            "options": [
+            {
+                "value": "top",
+                "label": "t:sections.image-rotator.settings.desktop_text_box_position.options__1.label"
+            },
+            {
+                "value": "middle",
+                "label": "t:sections.image-rotator.settings.desktop_text_box_position.options__2.label"
+            },
+            {
+                "value": "bottom",
+                "label": "t:sections.image-rotator.settings.desktop_text_box_position.options__3.label"
+            }
+            ],
+            "default": "middle",
+            "label": "t:sections.image-rotator.settings.desktop_text_box_position.label"
+        },
+        {
+            "type": "select",
+            "id": "color_scheme",
+            "options": [
+            {
+                "value": "accent-1",
+                "label": "t:sections.image-rotator.settings.color_scheme.options__1.label"
+            },
+            {
+                "value": "accent-2",
+                "label": "t:sections.image-rotator.settings.color_scheme.options__2.label"
+            },
+            {
+                "value": "background-1",
+                "label": "t:sections.image-rotator.settings.color_scheme.options__3.label"
+            },
+            {
+                "value": "background-2",
+                "label": "t:sections.image-rotator.settings.color_scheme.options__4.label"
+            },
+            {
+                "value": "inverse",
+                "label": "t:sections.image-rotator.settings.color_scheme.options__5.label"
+            }
+            ],
+            "default": "background-1",
+            "label": "t:sections.image-rotator.settings.color_scheme.label"
+        },
+        {
+          "type": "range",
+          "id": "text_box_opacity",
+          "label": "Text Box Background Opacity",
+          "unit": "%",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "default": 100
+        },
+        {
+            "type": "checkbox",
+            "id": "stack_images_on_mobile",
+            "default": true,
+            "label": "t:sections.image-rotator.settings.stack_images_on_mobile.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "adapt_height_first_image",
+            "default": false,
+            "label": "t:sections.image-rotator.settings.adapt_height_first_image.label"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "default": "Image rotator",
+            "label": "t:sections.image-rotator.blocks.slide.settings.slide.label"
+        },
+        {
+            "type": "text",
+            "id": "text",
+            "default": "Give customers details about the rotator image(s) or content on the template.",
+            "label": "t:sections.image-rotator.blocks.slide.settings.text.label"
+        },
+        {
+            "type": "text",
+            "id": "button_label_1",
+            "default": "Button label",
+            "label": "t:sections.image-rotator.blocks.slide.settings.button_label_1.label",
+            "info": "t:sections.image-rotator.blocks.slide.settings.button_label_1.info"
+        },
+        {
+            "type": "url",
+            "id": "button_link_1",
+            "label": "t:sections.image-rotator.blocks.slide.settings.button_link_1.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "button_style_secondary_1",
+            "default": false,
+            "label": "t:sections.image-rotator.blocks.slide.settings.button_style_secondary_1.label"
+        },
+        {
+            "type": "text",
+            "id": "button_label_2",
+            "default": "Button label",
+            "label": "t:sections.image-rotator.blocks.slide.settings.button_label_2.label",
+            "info": "t:sections.image-rotator.blocks.slide.settings.button_label_2.info"
+        },
+        {
+            "type": "url",
+            "id": "button_link_2",
+            "label": "t:sections.image-rotator.blocks.slide.settings.button_link_2.label"
+        },
+        {
+            "type": "checkbox",
+            "id": "button_style_secondary_2",
+            "default": false,
+            "label": "t:sections.image-rotator.blocks.slide.settings.button_style_secondary_2.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
